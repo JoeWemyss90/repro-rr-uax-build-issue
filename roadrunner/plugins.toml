@@ -1,0 +1,32 @@
+[velox]
+build_args = ['-trimpath', '-ldflags', '-s -X github.com/roadrunner-server/roadrunner/v2025/internal/meta.version=${BUILD_VERSION} -X github.com/roadrunner-server/roadrunner/v2025/internal/meta.buildTime=${CI_COMMIT_TIMESTAMP}']
+
+[roadrunner]
+ref = "v2025.1.13"
+
+[github]
+[github.token]
+token = "${GH_REPOS_TOKEN}"
+
+[github.plugins]
+
+tcp = { ref = "v5.1.9", owner = "roadrunner-server", repository = "tcp" }
+rpc = { ref = "v5.1.9", owner = "roadrunner-server", repository = "rpc" }
+server = { ref = "v5.2.10", owner = "roadrunner-server", repository = "server" }
+status = { ref = "v5.1.9", owner = "roadrunner-server", repository = "status" }
+http = { ref = "v5.3.0", owner = "roadrunner-server", repository = "http" }
+logger = { ref = "v5.1.9", owner = "roadrunner-server", repository = "logger" }
+jobs = { ref = "v5.1.9", owner = "roadrunner-server", repository = "jobs" }
+memory = { ref = "v5.2.9", owner = "roadrunner-server", repository = "memory" }
+static = { ref = "v5.2.0", owner = "roadrunner-server", repository = "static" }
+headers = { ref = "v5.2.0", owner = "roadrunner-server", repository = "headers" }
+gzip = { ref = "v5.3.0", owner = "roadrunner-server", repository = "gzip" }
+otel = { ref = "v5.5.0", owner = "roadrunner-server", repository = "otel" }
+metrics = { ref = "v5.2.0", owner = "roadrunner-server", repository = "metrics" }
+prometheus = { ref = "v5.2.0", owner = "roadrunner-server", repository = "prometheus" }
+
+repro-rr-uax-build-issue = { ref = "main", owner = "JoeWemyss90", repository = "repro-rr-uax-build-issue", replace="/builds/development/repro-rr-uax-build-issue"}
+
+[log]
+level = "debug"
+mode = "development"
