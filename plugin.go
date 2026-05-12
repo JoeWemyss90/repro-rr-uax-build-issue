@@ -9,6 +9,8 @@ import (
 	rrErrors "github.com/roadrunner-server/errors"
 	httpapi "github.com/roadrunner-server/http/v5/api"
 	"go.uber.org/zap"
+	ddfiber "gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 // PluginName contains default service name.
@@ -41,7 +43,12 @@ func (p *Plugin) Init(cfg httpapi.Configurer, log httpapi.Logger) error {
 	p.log = zap.L().Named(PluginName)
 
 	p.fiberApp = fiber.New()
+	p.fiberApp.Use(ddfiber.Middleware())
 	p.fiberApp.Get("/stub", func(c *fiber.Ctx) error {
+		if span, ok := tracer.SpanFromContext(c.UserContext()); ok {
+			span.SetTag("endpoint.stub", true)
+		}
+
 		return c.SendStatus(fiber.StatusNoContent)
 	})
 
