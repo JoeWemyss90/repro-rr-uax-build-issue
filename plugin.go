@@ -34,7 +34,7 @@ type Plugin struct {
 }
 
 func (p *Plugin) Init(cfg httpapi.Configurer, log httpapi.Logger) error {
-	const op = rrErrors.Op("pcx_frontend_api_rr_init")
+	const op = rrErrors.Op("sample_app_init")
 
 	if !cfg.Has(RootPluginName) {
 		return rrErrors.E(op, rrErrors.Disabled)
